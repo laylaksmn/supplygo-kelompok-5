@@ -1,13 +1,10 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "CRozz570";
-$db = "transport_db";
-$port = 3306;
-
-$mysqli = new mysqli($host, $user, $pass, $db, $port);
-
+$host = "localhost"; //ganti alamat IP
+$type = "admin";
+$pass = "admin123";
+$database = "supplygo";
+$port = "3306";
+$mysqli = new mysqli($host, $type, $pass, $database, $port);
 if ($mysqli->connect_errno) {
-    die("Koneksi database gagal: " . $mysqli->connect_error);
+  echo "ERROR: ", $mysqli->connect_error;
 }
-?>
