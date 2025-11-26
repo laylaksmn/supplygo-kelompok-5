@@ -1,26 +1,27 @@
 <?php
-require_once 'auth.php';
-require_once 'conn.php';
-$products = [];
-$user = $_SESSION['user'];
-$result = $mysqli->query("SELECT * FROM user WHERE email = '$user'");
-$userData = $result->fetch_assoc();
-$user_id = $userData['user_id'];
-$result = $mysqli->query("SELECT * FROM products WHERE user_id = '$user_id'");
-while ($productData = $result->fetch_assoc()) {
-    $market_id = $productData['market_id'];
-    $market_result = $mysqli->query("SELECT * FROM markets WHERE market_id = '$market_id'");
-    $marketData = $market_result->fetch_assoc();
-    $market = $marketData['name'];
-    $products[] = [
-        'name' => $productData['product_name'],
-        'market' => $market,
-        'weight' => $productData['weight'],
-        'price' => $productData['price'],
-        'stock' => $productData['stock'],
-        'image' => $productData['product_image_path']
-    ];
-}
+  require_once 'auth.php';
+  $user = $_SESSION['user'];
+  if ($user['role'] === 'customer') {
+    require_once 'connCustomer.php';
+  } else {
+    require_once 'conn.php';
+  }
+  $products = [];
+  $result = $mysqli->query("SELECT * FROM products WHERE user_id = '{$user['id']}'");
+  while ($productData = $result->fetch_assoc()) {
+      $market_id = $productData['market_id'];
+      $market_result = $mysqli->query("SELECT * FROM markets WHERE market_id = '$market_id'");
+      $marketData = $market_result->fetch_assoc();
+      $market = $marketData['name'];
+      $products[] = [
+          'name' => $productData['product_name'],
+          'market' => $market,
+          'weight' => $productData['weight'],
+          'price' => $productData['price'],
+          'stock' => $productData['stock'],
+          'image' => $productData['product_image_path']
+      ];
+  }
 ?>
 
 <!DOCTYPE html>
@@ -65,5 +66,6 @@ while ($productData = $result->fetch_assoc()) {
   <?php endforeach; ?>
 </main>
 
+<script src="script.js"></script>
 </body>
 </html>
