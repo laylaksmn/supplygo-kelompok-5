@@ -65,7 +65,6 @@
     </div>
   <?php endforeach; ?>
 </main>
-
-<script src="script.js"></script>
 </body>
 </html>
+
