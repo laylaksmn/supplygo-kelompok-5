@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <button type="submit" class="btn-signup">SIGN UP</button>
       <?php if (isset($_GET['username'])): ?>
-      <p class="error">Username taken</p>
+      <p class="error">Username is unavailable</p>
       <?php endif; ?>
       <?php if (isset($_GET['password'])): ?>
       <p class="error">Password didn't match</p>
@@ -84,3 +84,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 </body>
 </html>
+
