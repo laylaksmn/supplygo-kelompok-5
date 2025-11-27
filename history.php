@@ -1,10 +1,7 @@
 <?php
   require_once 'auth.php';
   $user = $_SESSION['user'];
-  if ($user['role'] === 'customer') {
-    require_once 'connCustomer.php';
-  } else {
-    require_once 'conn.php';
+  require_once 'conn.php';
   }
   $products = [];
   $result = $mysqli->query("SELECT * FROM products WHERE user_id = '{$user['id']}'");
@@ -67,4 +64,5 @@
 </main>
 </body>
 </html>
+
 
